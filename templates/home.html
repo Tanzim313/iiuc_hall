@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}IIUC Hall Meal | Home{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="text-center mb-5 animate__animated animate__fadeInDown">
+    <h1 class="display-4 fw-bold text-gradient mb-3" style="background: linear-gradient(90deg, #0d6efd, #6610f2); -webkit-background-clip: text; color: transparent;">
+      🍽️ Welcome To IIUC Hall Meal System
+    </h1>
+    <p class="lead text-secondary mb-4 fst-italic">
+      Manage your daily meals easily and efficiently.
+    </p>
+
+    <div class="d-flex justify-content-center gap-4 mt-4">
+      <a href="{% url 'login' %}" class="btn btn-outline-primary btn-lg px-5 shadow-sm btn-hover-grow">
+        Student Login
+      </a>
+      <a href="{% url 'manager_login' %}" class="btn btn-primary btn-lg px-5 shadow btn-hover-grow">
+        Manager Login
+      </a>
+    </div>
+  </div>
+
+  <!-- Meal Rules Included -->
+  {% include 'meal_rules.html' %}
+</div>
+
+<style>
+/* Gradient text for header */
+.text-gradient {
+  background: linear-gradient(90deg, #0d6efd, #6610f2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Button hover grow effect */
+.btn-hover-grow {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.btn-hover-grow:hover, .btn-hover-grow:focus {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(13, 110, 253, 0.4);
+  outline: none;
+}
+
+/* Smooth fadeInDown from Animate.css is used */
+/* You can add more custom animation if needed */
+</style>
+
+<!-- Animate.css CDN (if not already included in base.html) -->
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+/>
+
+{% endblock %}

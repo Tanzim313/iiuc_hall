@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container py-5">
+  <div class="card shadow-lg border-0 rounded-4">
+    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center rounded-top-4">
+      <h2 class="mb-0">👨‍🍳 Meal Manager Dashboard</h2>
+      <span class="badge bg-light text-dark px-3 py-2 rounded-pill">{{ today }}</span>
+    </div>
+
+    <div class="card-body px-4">
+      <!-- Action Buttons -->
+      <div class="row row-cols-1 row-cols-md-4 g-3 mb-4">
+        <div class="col">
+          <a href="{% url 'daily_meal_list' %}" class="btn btn-outline-dark w-100">📄 Daily Meal PDF</a>
+        </div>
+        <div class="col">
+          <a href="{% url 'monthly_summary_pdf' %}" class="btn btn-outline-info w-100">📊 Student Reacord</a>
+        </div>
+        <div class="col">
+          <a href="{% url 'bazar_cost_update' %}" class="btn btn-outline-success w-100">🛒 Bazar Update</a>
+        </div>
+        <div class="col">
+          <a href="{% url 'guest_meal_update' %}" class="btn btn-outline-warning w-100">👥 Guest Meal</a>
+        </div>
+        <div class="col">
+          <a href="{% url 'payment_list' %}" class="btn btn-outline-primary w-100">💰 Payment Input</a>
+        </div>
+        <div class="col">
+          <a href="{% url 'manager_info' %}" class="btn btn-outline-dark w-100">👨‍💼 Manager Info</a>
+        </div>
+        <div class="col">
+          <a href="{% url 'monthly_summary_page' %}" class="btn btn-outline-primary w-100">📊 Present Monthly Summary</a>
+        </div>
+        <div class="col">
+          <a href="{% url 'monthly_cost_page' %}" class="btn btn-outline-success w-100">📊 Previous Month Reacord</a>
+        </div>
+      </div>
+
+      <!-- Meal Count Summary -->
+      <div class="row text-center mb-4">
+        <div class="col-md-3 mb-2">
+          <div class="alert alert-info">Breakfast: {{ breakfast_count }}</div>
+        </div>
+        <div class="col-md-3 mb-2">
+          <div class="alert alert-success">Lunch: {{ lunch_count }}</div>
+        </div>
+        <div class="col-md-3 mb-2">
+          <div class="alert alert-warning">Dinner: {{ dinner_count }}</div>
+        </div>
+        <div class="col-md-3 mb-2">
+          <div class="alert alert-primary">Paid: {{ paid_students|length }} | Unpaid: {{ unpaid_students|length }}</div>
+        </div>
+      </div>
+
+      <!-- Paid Students -->
+      <div class="card mb-4 border-success shadow-sm">
+        <div class="card-header bg-success text-white">
+          ✅ Paid Students ({{ paid_students|length }})
+        </div>
+        <div class="card-body">
+          <input type="text" id="paidSearch" class="form-control mb-3" placeholder="Search paid student...">
+          <ul class="list-group" id="paidList">
+            {% for student in paid_students %}
+              <li class="list-group-item">{{ student.get_full_name }} ({{ student.studentprofile.meal_serial }})</li>
+            {% empty %}
+              <li class="list-group-item text-muted">No paid students yet.</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+
+      <!-- Unpaid Students -->
+      <div class="card mb-4 border-danger shadow-sm">
+        <div class="card-header bg-danger text-white">
+          ❌ Unpaid Students ({{ unpaid_students|length }})
+        </div>
+        <div class="card-body">
+          <input type="text" id="unpaidSearch" class="form-control mb-3" placeholder="Search unpaid student...">
+          <ul class="list-group" id="unpaidList">
+            {% for student in unpaid_students %}
+              <li class="list-group-item">{{ student.get_full_name }} ({{ student.studentprofile.meal_serial }})</li>
+            {% empty %}
+              <li class="list-group-item text-muted">No unpaid students.</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Search Script -->
+<script>
+  document.getElementById('paidSearch').addEventListener('input', function () {
+    const filter = this.value.toLowerCase();
+    const items = document.querySelectorAll('#paidList .list-group-item');
+    items.forEach(item => {
+      const name = item.textContent.toLowerCase();
+      item.style.display = name.includes(filter) ? '' : 'none';
+    });
+  });
+
+  document.getElementById('unpaidSearch').addEventListener('input', function () {
+    const filter = this.value.toLowerCase();
+    const items = document.querySelectorAll('#unpaidList .list-group-item');
+    items.forEach(item => {
+      const name = item.textContent.toLowerCase();
+      item.style.display = name.includes(filter) ? '' : 'none';
+    });
+  });
+</script>
+{% endblock %}

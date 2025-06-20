@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container my-4">
+  <h2>📊 Monthly Summary</h2>
+  <p>🗓️ Month: June 2025</p>
+  <p>👤 Manager: {{ request.user.get_full_name }}</p>
+  <p>🍽️ Total Meals: ...</p>
+  <p>👥 Total Guest Meals: ...</p>
+  <p>💰 Total Collected: ...</p>
+  <p>🛒 Bazar Cost: ...</p>
+  <p>📈 Per Meal Rate: ...</p>
+  <a href="{% url 'monthly_summary_pdf' %}" class="btn btn-info">📄 Download PDF</a>
+</div>
+{% endblock %}

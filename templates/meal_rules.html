@@ -1,0 +1,106 @@
+<div class="rules-box animate__animated animate__fadeInUp text-center">
+    <h4 class="mb-4">📋 Meal Management Rules</h4>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">🕛 প্রতিদিন ১১ রাত টার মধ্যে মিল অন/অফ করতে হবে।</li>
+        <li class="list-group-item">🍽️ যে দিন মিল  "অন" করবেন,সেই দিন খাবার পাবেন।</li>
+        <li class="list-group-item">⚠️ মাসের প্রথম তিনদিনের মধ্যেই সর্বনিম্ন ১৫০০ টাকা দিতে হবে এবং ১৫ তারিখের মধ্যেই সম্পূর্ণ টাকা পরিশোধ করতে হবে।</li>
+        <li class="list-group-item">👥 গেস্ট Meal নিতে হলে আগে Meal Manager কে জানাতে হবে।</li>
+        <li class="list-group-item">⚠️ যে কোনো সমস্যা বা অভিযোগ থাকলে Dining Representative কে জানাতে হবে।</li>
+    </ul>
+</div>
+
+<style>
+.rules-box {
+    background: #ffffffcc; 
+    border-radius: 20px;
+    padding: 30px 30px;
+    margin: 40px auto 60px auto;
+    max-width: 600px;
+    max-height: 320px; /* scroll dekhanor jnno height fixed */
+    box-shadow: 0 8px 30px rgba(13, 110, 253, 0.2);
+    overflow-y: auto; /* vertical scroll*/
+    border: 2px solid #0d6efd;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+}
+
+/* Scrollbar  */
+.rules-box::-webkit-scrollbar {
+    width: 8px;
+}
+.rules-box::-webkit-scrollbar-thumb {
+    background-color: #0d6efd;
+    border-radius: 10px;
+}
+.rules-box::-webkit-scrollbar-track {
+    background: #e9ecef;
+    border-radius: 10px;
+}
+
+.rules-box h4 {
+    color: #0d6efd;
+    font-weight: 700;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+}
+
+.list-group-item {
+    font-size: 1.2rem;
+    border: none;
+    padding: 10px 15px;
+    background: transparent;
+    color: #333;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    cursor: default;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.05);
+}
+
+/* List item hover effect */
+.list-group-item:hover {
+    background-color: #0d6efd;
+    color: white;
+    box-shadow: 0 4px 15px rgba(13,110,253,0.4);
+}
+
+/* Animation for list items: fade in with delay */
+.list-group-item {
+    opacity: 0;
+    animation: fadeInUpItem 0.6s forwards;
+}
+
+.list-group-item:nth-child(1) {
+    animation-delay: 0.3s;
+}
+.list-group-item:nth-child(2) {
+    animation-delay: 0.5s;
+}
+.list-group-item:nth-child(3) {
+    animation-delay: 0.7s;
+}
+.list-group-item:nth-child(4) {
+    animation-delay: 0.9s;
+}
+.list-group-item:nth-child(5) {
+    animation-delay: 1.1s;
+}
+
+@keyframes fadeInUpItem {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+</style>
+
+<!-- Animate.css CDN -->
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+/>

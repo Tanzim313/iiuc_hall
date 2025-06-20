@@ -1,0 +1,35 @@
+<!-- templates/payments/payment_list.html -->
+{% extends 'base.html' %}
+{% block content %}
+<div class="container py-4">
+  <h2 class="mb-3">💳 All Payments</h2>
+  <a href="{% url 'add_payment' %}" class="btn btn-primary mb-3">➕ Add New Payment</a>
+  <a href="{% url 'payment_summary' %}" class="btn btn-primary mb-3">Paid Stusent list</a>
+
+
+  <table class="table table-bordered table-striped">
+    <thead class="table-light">
+      <tr>
+        <th>No</th>
+        <th>Student</th>
+        <th>Amount</th>
+        <th>Date</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for payment in payments %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ payment.student.get_full_name }}</td>
+        <td>{{ payment.amount }} Tk</td>
+        <td>{{ payment.date }}</td>
+        <td>
+          <a href="{% url 'edit_payment' payment.id %}" class="btn btn-sm btn-warning">✏️ Edit</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

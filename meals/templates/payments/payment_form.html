@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container py-4">
+  <h2 class="mb-4 text-primary">{{ title }}</h2>
+
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-success">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+
+  <form method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="id_student" class="form-label">Student</label>
+      {{ form.student }}
+    </div>
+    <div class="mb-3">
+      <label for="id_amount" class="form-label">Amount (Tk)</label>
+      {{ form.amount }}
+    </div>
+    <button type="submit" class="btn btn-success">{{ title }}</button>
+  </form>
+</div>
+{% endblock %}

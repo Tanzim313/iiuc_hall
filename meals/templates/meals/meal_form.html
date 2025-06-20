@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block content %}
+<div class="container mt-5">
+  <div class="card shadow-lg rounded">
+    <div class="card-header bg-primary text-white">
+      <h4 class="mb-0">🍽 Submit Meal
+         <small class="ms-3" style="font-size: 0.9rem; color:black;">
+          📅 {{ today|date:"d M, Y" }}
+        </small>
+      </h4>
+      
+    </div>
+    <div class="card-body">
+      <form method="post" id="mealForm">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="meal_date" class="form-label">Select Date</label>
+          <input type="date" id="meal_date" name="date" class="form-control" required
+            min="{{ today|date:'Y-m-d' }}">
+        </div>
+        <div class="form-check mb-3">
+          <input class="form-check-input" type="checkbox" name="breakfast" id="breakfast">
+          <label class="form-check-label" for="breakfast">
+            🍛 Breakfast
+          </label>
+        </div>
+
+        <div class="form-check mb-3">
+          <input class="form-check-input" type="checkbox" name="lunch" id="lunch">
+          <label class="form-check-label" for="lunch">
+            🍛 Lunch
+          </label>
+        </div>
+        <div class="form-check mb-3">
+          <input class="form-check-input" type="checkbox" name="dinner" id="dinner">
+          <label class="form-check-label" for="dinner">
+            🍲 Dinner
+          </label>
+        </div>
+
+        <button type="submit" class="btn btn-success">✅ Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('mealForm');
+    const dateInput = document.getElementById('meal_date');
+
+    // submitted_dates--- view 
+    const submittedDates = {{ submitted_dates|safe }};
+
+    form.addEventListener('submit', (e) => {
+      const selectedDate = dateInput.value;
+      if (submittedDates.includes(selectedDate)) {
+        e.preventDefault();
+        alert("⚠ You have already submitted meal for " + selectedDate + ". Please select another date.");
+      }
+    });
+  });
+</script>
+{% endblock %}

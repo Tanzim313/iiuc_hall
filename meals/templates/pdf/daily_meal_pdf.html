@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <style>
+    body {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      color: #212529;
+    }
+
+    h2 {
+      text-align: center;
+      margin: 10px 0;
+      color: #0d6efd;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 8px;
+      border: 1px solid #dee2e6;
+      text-align: center;
+    }
+
+    thead th {
+      background-color: #0d6efd;
+      color: #fff;
+    }
+
+    tbody tr:nth-child(odd) {
+      background-color: #f8f9fa;
+    }
+
+    /* Name column bigger */
+    td.name-col {
+      text-align: left;
+      font-weight: 600;
+      width: 25%;
+    }
+
+    .on {
+      color: #198754;
+      font-weight: bold;
+    }
+
+    .off {
+      color: #dc3545;
+      font-weight: bold;
+    }
+  </style>
+  <title>Daily Meal List</title>
+</head>
+<body>
+  <h2>IIUC Daily Meal List – {{ today }}</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>No</th>
+        <th>Name</th>
+        <th>Room</th>
+        <th>Meal Serial</th>
+        <th>Breakfast</th>
+        <th>Lunch</th>
+        <th>Dinner</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for meal in meals %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td class="name-col">{{ meal.student.get_full_name }}</td>
+        <td>{{ meal.student.studentprofile.room_number }}</td>
+        <td>{{ meal.student.studentprofile.meal_serial }}</td>
+        <td>
+          {% if meal.breakfast %}
+            <span class="on">On</span>
+          {% else %}
+            <span class="off">Off</span>
+          {% endif %}
+        </td>
+        <td>
+          {% if meal.lunch %}
+            <span class="on">On</span>
+          {% else %}
+            <span class="off">Off</span>
+          {% endif %}
+        </td>
+        <td>
+          {% if meal.dinner %}
+            <span class="on">On</span>
+          {% else %}
+            <span class="off">Off</span>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</body>
+</html>
